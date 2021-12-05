@@ -1,3 +1,9 @@
+# Commands
+
+npx create-react-app laserweb-kiosk --template typescript
+npm install @mui/material @emotion/react @emotion/styled
+npm install @fontsource/roboto
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
