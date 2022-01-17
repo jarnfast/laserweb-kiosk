@@ -28,6 +28,12 @@ Example:
 `http://localhost:3000/communications?server=rpi:8000&port=/dev/ttyUSB0&autoconnect=true`
 This will connect to the lw.comm-server running on `rpi:8000` and then connect to the machine on port `/dev/ttyUSB0`
 
+# Shutdown feature
+
+The UI supports shutting down the host running the `lw.comm-service` if the backend service supports the shutdown feature.
+
+The feature is currently available in this fork (and branch): [modified lw.comm-server](https://github.com/jarnfast/lw.comm-server/tree/feature/enable-shutdown)
+
 # Screenshots
 
 ![laserweb-kiosk-control-320x240.png](https://github.com/jarnfast/laserweb-kiosk/raw/main/media/laserweb-kiosk-control-320x240.png)

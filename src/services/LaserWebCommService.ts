@@ -221,7 +221,7 @@ class LaserWebCommService {
         this.ports = data;
         this.dispatch({
           type: ActionType.PORTS_UPDATED,
-          payload: this.ports.map((obj) => obj.comName),
+          payload: this.ports.map((obj) => obj.path),
         });
       }
     });
