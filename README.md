@@ -25,8 +25,8 @@ Then direct your browser to [http://localhost:3000/](http://localhost:3000/).
 The application can auto-connect to a server and machine using the following query parameters.
 
 Example:
-`http://localhost:3000/communications?server=rpi:8000&port=/dev/ttyUSB0&autoconnect=true`
-This will connect to the lw.comm-server running on `rpi:8000` and then connect to the machine on port `/dev/ttyUSB0`
+`http://localhost:3000/communications?server=rpi:8000&port=/dev/ttyUSB0&baudRate=115200&autoconnect=true`
+This will connect to the lw.comm-server running on `rpi:8000` and then connect to the machine on port `/dev/ttyUSB0` with baud rate `115200`.
 
 # Shutdown feature
 
