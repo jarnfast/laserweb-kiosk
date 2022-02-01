@@ -11,7 +11,12 @@ export enum ActionType {
   MACHINEPOSITION_UPDATED = "lw/MachinePositionUpdated",
   MACHINESTATE_UPDATED = "lw/MachineStateUpdated",
 
-  SERVER_FEATURE_SHUTDOWN_UPDATED = 'lw/ServerFeatureShutdownUpdated',
+  SERVER_FEATURE_SHUTDOWN_UPDATED = "lw/ServerFeatureShutdownUpdated",
+
+  JOG_FEEDRATE_UPDATED = "lw/JogFeedRateUpdated",
+  LASERTEST_POWER_UPDATED = "lw/LaserTestPowerUpdated",
+  LASERTEST_DURATION_UPDATED = "lw/LaserTestDurationUpdated",
+  LASERTEST_PWM_MAX_S_UPDATED = "lw/LaserTestPwmMaxSUpdated",
 
   CONNECT_SERVER = "lw/ConnectServer",
   CONNECT_MACHINE = "lw/ConnectMachine",
@@ -21,10 +26,11 @@ export enum ActionType {
 
   SHUTDOWN_SERVER = "lw/ShutdownServer",
 
-  JOG = 'lw/Jog',
-  RUN_COMMAND = 'lw/RunCommand',
-  HOME = 'lw/Home',
-  SET_ZERO = 'lw/SetZero',
+  JOG = "lw/Jog",
+  RUN_COMMAND = "lw/RunCommand",
+  HOME = "lw/Home",
+  SET_ZERO = "lw/SetZero",
+  LASERTEST = "lw/LaserTest",
 
   PAUSE = "lw/Pause",
   RESUME = "lw/Resume",
@@ -39,8 +45,7 @@ interface actionWithoutPayload {
     | ActionType.MACHINE_DISCONNECTED
     | ActionType.SHUTDOWN_SERVER
     | ActionType.PAUSE
-    | ActionType.RESUME
-    ;
+    | ActionType.RESUME;
 }
 
 interface actionStringPayload {
@@ -55,16 +60,22 @@ interface actionStringPayload {
   payload: string;
 }
 
-interface actionBooleanPayload {
+interface actionNumberPayload {
   type:
-    | ActionType.SERVER_FEATURE_SHUTDOWN_UPDATED;
+    | ActionType.JOG_FEEDRATE_UPDATED
+    | ActionType.LASERTEST_POWER_UPDATED
+    | ActionType.LASERTEST_DURATION_UPDATED
+    | ActionType.LASERTEST_PWM_MAX_S_UPDATED;
+  payload: number;
+}
+
+interface actionBooleanPayload {
+  type: ActionType.SERVER_FEATURE_SHUTDOWN_UPDATED;
   payload: boolean;
 }
 
 interface actionPositionPayload {
-  type:
-    | ActionType.WORKPOSITION_UPDATED
-    | ActionType.MACHINEPOSITION_UPDATED;
+  type: ActionType.WORKPOSITION_UPDATED | ActionType.MACHINEPOSITION_UPDATED;
   payload: Position;
 }
 
@@ -79,16 +90,22 @@ export interface payloadConnectMachineType {
   baudRate: number;
 }
 
+export interface payloadLaserTest {
+  duration: number;
+  pwmMaxS: number;
+  power: number;
+}
+
 export interface payloadJogData {
-  axis: string,
-  distance: number,
-  feedrate: number,
+  axis: string;
+  distance: number;
+  feedrate: number;
 }
 
 export interface Position {
-  x: number | null,
-  y: number | null,
-  z: number | null,
+  x: number | null;
+  y: number | null;
+  z: number | null;
 }
 
 interface actionConnectMachinePayload {
@@ -106,11 +123,18 @@ interface actionJogDataPayload {
   payload: payloadJogData;
 }
 
+interface actionLaserTestPayload {
+  type: ActionType.LASERTEST;
+  payload: payloadLaserTest;
+}
+
 export type Action =
   | actionWithoutPayload
   | actionBooleanPayload
   | actionStringPayload
+  | actionNumberPayload
   | actionPortsUpdated
   | actionPositionPayload
   | actionJogDataPayload
+  | actionLaserTestPayload
   | actionConnectMachinePayload;

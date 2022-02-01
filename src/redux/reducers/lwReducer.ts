@@ -5,14 +5,6 @@ import {
   payloadConnectMachineType,
 } from "../actionTypes/lwActionTypes";
 
-/*export interface Comment {
-    postId: number,
-    id: number,
-    name: string,
-    email: string,
-    body: string
-}*/
-
 interface State {
   //comments: Comment[];
   //loading: boolean;
@@ -25,6 +17,11 @@ interface State {
   server: string | null;
   activePort: payloadConnectMachineType | null;
 
+  jogFeedRate: number;
+  laserTestDuration: number;
+  laserTestPower: number;
+  laserTestPwmMaxS: number;
+
   serverFeatureShutdownEnabled: boolean;
 
   runStatus: string;
@@ -35,16 +32,18 @@ interface State {
 }
 
 const initialState = {
-  /*comments: [],
-    loading: false, 
-    error: null */
   serverConnected: false,
   machineConnected: false,
   serverFeatureShutdownEnabled: false,
   availablePorts: [],
-  //port: null,
   server: null,
   activePort: null,
+
+  // TODO get from env
+  jogFeedRate: 1800,
+  laserTestDuration: 200,
+  laserTestPower: 1,
+  laserTestPwmMaxS: 1000,
 
   runStatus: "n/a",
   machineState: "n/a",
@@ -123,7 +122,27 @@ const lwReducer = (state: State = initialState, action: Action): State => {
       return {
         ...state,
         serverFeatureShutdownEnabled: action.payload,
-      }
+      };
+    case ActionType.JOG_FEEDRATE_UPDATED:
+      return {
+        ...state,
+        jogFeedRate: action.payload,
+      };
+    case ActionType.LASERTEST_DURATION_UPDATED:
+      return {
+        ...state,
+        laserTestDuration: action.payload,
+      };
+    case ActionType.LASERTEST_POWER_UPDATED:
+      return {
+        ...state,
+        laserTestPower: action.payload,
+      };
+    case ActionType.LASERTEST_PWM_MAX_S_UPDATED:
+      return {
+        ...state,
+        laserTestPwmMaxS: action.payload,
+      };
     default:
       return state;
   }

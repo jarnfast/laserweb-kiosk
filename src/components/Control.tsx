@@ -54,8 +54,16 @@ const Control: FC<any> = (): ReactElement => {
 
   const dispatch = useDispatch();
 
-  const { machineConnected, workPosition, machinePosition, machineState } =
-    useTypedSelector((state) => state.lwState);
+  const {
+    machineConnected,
+    workPosition,
+    machinePosition,
+    machineState,
+    jogFeedRate,
+    laserTestDuration,
+    laserTestPower,
+    laserTestPwmMaxS,
+  } = useTypedSelector((state) => state.lwState);
 
   const jogDistances: number[] = [0.1, 1, 10, 50, 100];
 
@@ -85,7 +93,7 @@ const Control: FC<any> = (): ReactElement => {
       payload: {
         axis: axis,
         distance: direction * uiJogDistance,
-        feedrate: 1800,
+        feedrate: jogFeedRate,
       },
     });
   };
@@ -134,7 +142,16 @@ const Control: FC<any> = (): ReactElement => {
           payload: "all",
         });
         break;
-
+      case "btn-laser-test":
+        dispatch({
+          type: ActionType.LASERTEST,
+          payload: {
+            duration: laserTestDuration,
+            power: laserTestPower,
+            pwmMaxS: laserTestPwmMaxS,
+          },
+        });
+        break;
       default:
       // do nothing
     }

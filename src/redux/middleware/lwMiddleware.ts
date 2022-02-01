@@ -9,8 +9,6 @@ const lwMiddleware = (store: any) => {
   const laserWebCommService = new LaserWebCommService(dispatchAny);
 
   return (next: any) => (action: Action) => {
-    //const lwState = store.getState().lwState;
-
     if (
       action.type !== ActionType.MACHINEPOSITION_UPDATED &&
       action.type !== ActionType.WORKPOSITION_UPDATED
@@ -43,6 +41,9 @@ const lwMiddleware = (store: any) => {
         break;
       case ActionType.JOG:
         laserWebCommService.jog(action.payload);
+        break;
+      case ActionType.LASERTEST:
+        laserWebCommService.laserTest(action.payload);
         break;
       case ActionType.RUN_COMMAND:
         laserWebCommService.runCommand(action.payload);

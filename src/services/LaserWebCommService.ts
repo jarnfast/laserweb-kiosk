@@ -7,6 +7,7 @@ import {
   MachineConnectionType,
   payloadConnectMachineType,
   payloadJogData,
+  payloadLaserTest,
 } from "../redux/actionTypes/lwActionTypes";
 
 class LaserWebCommService {
@@ -63,6 +64,10 @@ class LaserWebCommService {
   jog(jogData: payloadJogData) {
     let data = `${jogData.axis},${jogData.distance},${jogData.feedrate.toFixed(0)}`;
     this.socket.emit('jog', data);
+  }
+
+  laserTest(laserTestData: payloadLaserTest) {
+    this.socket.emit('laserTest', laserTestData.power.toFixed(0) + ',' + laserTestData.duration.toFixed(0) + ',' + laserTestData.pwmMaxS.toFixed(0));
   }
 
   runCommand(gcode: string) {
