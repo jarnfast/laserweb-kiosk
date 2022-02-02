@@ -6,7 +6,7 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import MuiListItemText from "@mui/material/ListItemText";
 import MuiListItemIcon from "@mui/material/ListItemIcon";
-import { PowerSettingsNew, ExpandCircleDown } from "@mui/icons-material";
+import { PowerSettingsNew } from "@mui/icons-material";
 import { ActionType } from "../redux/actionTypes/lwActionTypes";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../hooks/useTypeSelector";
@@ -86,10 +86,10 @@ const DrawerNavigation: React.FC = (props: any) => {
     setOpen(false);
   };
 
-  const toggleDrawer = () => {
+  /*const toggleDrawer = () => {
     console.log("toggleDrawer");
     setOpen(!open);
-  };
+  };*/
 
   const handleShutdownClicked = () => {
     setShowShutdownDialog(true);
