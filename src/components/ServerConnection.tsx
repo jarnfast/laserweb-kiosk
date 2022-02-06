@@ -44,6 +44,7 @@ const ServerConnection: FC<ServerProps> = ({ initialServer }): ReactElement => {
   React.useEffect(() => {
     console.log("useEffect SC", server);
     console.log("autoConnect", autoConnect);
+    console.log("window.runtime-env", window.__RUNTIME_ENVIRONMENT__);
 
     let chosenServer = updateUiServerFromStateAndQuery();
 

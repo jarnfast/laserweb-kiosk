@@ -29,12 +29,19 @@ jobs:
           npm install generate-license-file -g
       - name: Build optimized web app
         run: npm run build --if-present
+      - name: Prepare package
+        run: mkdir -p package
       - name: Generate third party licenses
-        run: generate-license-file --input package.json --output third-party-licenses.txt --overwrite
+        run: generate-license-file --input package.json --output package/third-party-licenses.txt --overwrite
       - name: Package
         run: |
-          tar zcf laserweb-kiosk-${{ steps.get_version.outputs.VERSION }}.tgz --owner=0 --group=0 build LICENSE third-party-licenses.txt
-          tar tzvf laserweb-kiosk-${{ steps.get_version.outputs.VERSION }}.tgz
+          chmod +x scripts/*
+          cp scripts/* package/
+          cp -r build package/
+          cp LICENSE package/
+          cd package
+          tar zcf ../laserweb-kiosk-${{ steps.get_version.outputs.VERSION }}.tgz --owner=0 --group=0 .
+          tar tzvf ../laserweb-kiosk-${{ steps.get_version.outputs.VERSION }}.tgz
       - name: Upload the package
         uses: actions/upload-artifact@v2
         with:

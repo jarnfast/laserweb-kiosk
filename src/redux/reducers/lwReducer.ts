@@ -5,15 +5,12 @@ import {
   payloadConnectMachineType,
 } from "../actionTypes/lwActionTypes";
 
+import Config from "../../config";
+
 interface State {
-  //comments: Comment[];
-  //loading: boolean;
-  //error: string | null;
   serverConnected: boolean;
   machineConnected: boolean;
-  //activeInterface: string,
   availablePorts: string[];
-  //port: string | null,
   server: string | null;
   activePort: payloadConnectMachineType | null;
 
@@ -36,14 +33,13 @@ const initialState = {
   machineConnected: false,
   serverFeatureShutdownEnabled: false,
   availablePorts: [],
-  server: null,
+  server: Config.server,
   activePort: null,
 
-  // TODO get from env
-  jogFeedRate: 1800,
-  laserTestDuration: 200,
-  laserTestPower: 1,
-  laserTestPwmMaxS: 1000,
+  jogFeedRate: Config.jogFeedRate,
+  laserTestDuration: Config.laserTestDuration,
+  laserTestPower: Config.laserTestPower,
+  laserTestPwmMaxS: Config.laserTestPwmMaxS,
 
   runStatus: "n/a",
   machineState: "n/a",

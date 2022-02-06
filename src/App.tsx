@@ -2,7 +2,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import "./App.css";
 
@@ -125,6 +125,9 @@ function App() {
                 {route.component}
               </Route>
             ))}
+            <Route exact path="/">
+              <Redirect to="/communications"/>
+            </Route>
           </Switch>
         </Box>
       </Box>
