@@ -14,6 +14,24 @@ For inspiration on configuring your favorite Raspberry Pi as a kiosk: [CNCjs Web
 
 # Running
 
+After downloading and unpacking a release archive the LaserWeb Kiosk can be served by running the `start-laserweb-kiosk.sh` then direct your browser to [http://localhost:4000/](http://localhost:4000/).
+
+## Environment variables
+
+The script supports the following environment variables:
+
+| Name | Description | Default |
+| --- | --- | --- |
+| LWKSERVE_PORT | Port the service will listen on | 4000 |
+| LWK_SERVER | Backend lw.comm-server host and port. E.g. rpi:8000 | - |
+| LWK_JOG_FEEDRATE | Jog feedrate (mm/min) | 1800 |
+| LWK_LASERTEST_DURATION | Lasertest duration (ms) | 200 |
+| LWK_LASERTEST_POWER | Lasertest power (%) | 1 |
+| LWK_LASERTEST_PWM_MAX_S | Lasertest PWM Max S value | 1000 |
+
+All `LWK_*` variables are initial values only and can be changed in the UI after start-up.
+
+# Local development
 ```
 npm install
 npm start
